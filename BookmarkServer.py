@@ -5,8 +5,8 @@
 import http.server
 import requests
 import os
-import threading
 from urllib.parse import unquote, parse_qs
+import threading
 from socketserver import ThreadingMixIn
 
 memory = {}
@@ -29,7 +29,7 @@ form = '''<!DOCTYPE html>
 {}
 </pre>
 '''
-class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer);
+class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
 
 def CheckURI(uri, timeout=5):
     '''Check whether this URI is reachable, i.e. does it return a 200 OK?
