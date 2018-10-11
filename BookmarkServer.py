@@ -30,7 +30,6 @@ form = '''<!DOCTYPE html>
 </pre>
 '''
 
-
 def CheckURI(uri, timeout=5):
     '''Check whether this URI is reachable, i.e. does it return a 200 OK?
 
@@ -47,7 +46,8 @@ def CheckURI(uri, timeout=5):
         return False
 
 
-class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
+class Shortener(http.server.BaseHTTPRequestHandler):
+    "This is an HTTPServer that supports thread-based concurrency."
     def do_GET(self):
         # A GET request will either be for / (the root path) or for /some-name.
         # Strip off the / and we have either empty string or a name.
