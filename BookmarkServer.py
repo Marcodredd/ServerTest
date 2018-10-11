@@ -30,6 +30,7 @@ form = '''<!DOCTYPE html>
 </pre>
 '''
 
+
 def CheckURI(uri, timeout=5):
     '''Check whether this URI is reachable, i.e. does it return a 200 OK?
 
