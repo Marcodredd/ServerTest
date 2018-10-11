@@ -6,8 +6,6 @@ import http.server
 import requests
 import os
 from urllib.parse import unquote, parse_qs
-import threading
-from socketserver import ThreadingMixIn
 
 memory = {}
 
@@ -30,6 +28,7 @@ form = '''<!DOCTYPE html>
 </pre>
 '''
 
+
 def CheckURI(uri, timeout=5):
     '''Check whether this URI is reachable, i.e. does it return a 200 OK?
 
@@ -47,7 +46,6 @@ def CheckURI(uri, timeout=5):
 
 
 class Shortener(http.server.BaseHTTPRequestHandler):
-    "This is an HTTPServer that supports thread-based concurrency."
     def do_GET(self):
         # A GET request will either be for / (the root path) or for /some-name.
         # Strip off the / and we have either empty string or a name.
@@ -111,5 +109,5 @@ class Shortener(http.server.BaseHTTPRequestHandler):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
-    httpd = ThreadHTTPServer(server_address, Shortener)
+    httpd = http.server.HTTPServer(server_address, Shortener)
     httpd.serve_forever()
